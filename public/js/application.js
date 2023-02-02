@@ -2,6 +2,8 @@ const container = document.querySelector(".post-container");
 
 // console.log(container);
 
+//! Добавить оценки по нажатию на кнопку
+
 container.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -28,5 +30,23 @@ container.addEventListener("click", async (e) => {
       console.log(e);
     }
     button.style.color = "blue";
+  }
+
+  //!Удалить пост
+
+  if (e.target.classList.contains("delete")) {
+    const getLinkElement = e.target;
+
+    const { href } = getLinkElement;
+
+    try {
+     await fetch(href, {
+        method: "DELETE",
+     });
+
+    } catch (e) {
+      console.log(e);
+    }
+    getLinkElement.parentNode.parentNode.remove();
   }
 });
